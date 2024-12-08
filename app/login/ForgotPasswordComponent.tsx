@@ -16,15 +16,15 @@ const ForgotPasswordComponent = () => {
     const linkColor = currentTheme === 'light'? Colors["link_text_dark"] : Colors["link_text_light"];
 
     return (
-        <SafeAreaView style={styles.loginContainer}>
-            <View style={styles.loginTopTitleBarContainer}>
-                <Image source={require("../assets/appicon.png")} style={styles.loginAppIcon} />
-                <Text style={[styles.loginAppTitle, styles.lobsterRegular, {color: primaryTextColor}]}>MyCircle</Text>
+        <SafeAreaView style={styles.forgotPassContainer}>
+            <View style={styles.forgotPassTopTitleBarContainer}>
+                <Image source={require("../assets/appicon.png")} style={styles.forgotPassAppIcon} />
+                <Text style={[styles.forgotPassAppTitle, styles.lobsterRegular, {color: primaryTextColor}]}>MyCircle</Text>
                 <View style={styles.placeholderView}></View>
             </View>
-            <Image source={require("../assets/forgot-password.png")} style={styles.loginImage1} resizeMode="center" />
-            <Text style={[styles.ubuntuBold, styles.loginHeading1Text, {color: primaryTextColor}]}>Forgot Password</Text>
-            <Text style={[styles.ubuntuRegular, styles.onboardContent1Text, {color: secondaryTextColor}]}>
+            <Image source={require("../assets/forgot-password.png")} style={styles.forgotPassImage1} resizeMode="center" />
+            <Text style={[styles.ubuntuBold, styles.forgotPassHeading1Text, {color: primaryTextColor}]}>Forgot Password</Text>
+            <Text style={[styles.ubuntuRegular, styles.forgotPassContent1Text, {color: secondaryTextColor}]}>
                 Enter your email and we'll send you a link to reset your password to your email.
             </Text>
             <View style={styles.inputContainer}>
@@ -40,17 +40,17 @@ const ForgotPasswordComponent = () => {
                 />
             </View>
             <TouchableOpacity
-                style={[styles.loginActionButton, styles.loginActionButtonGetstarted]}
+                style={[styles.forgotPassActionButton, styles.forgotPassActionButtonGetstarted]}
                 activeOpacity={0.9}
                 disabled={isLogginInProgress}
             >
                 {isLogginInProgress ? 
                 <ActivityIndicator size='small' color='#f7fff7' /> :
-                <Text style={[styles.ubuntuBold, styles.loginActionButtonText, styles.loginGetstartedText]}>Submit</Text>
+                <Text style={[styles.ubuntuBold, styles.forgotPassActionButtonText, styles.forgotPassGetstartedText]}>Submit</Text>
                 }
             </TouchableOpacity>
-            <View style={styles.loginForgotPasswordContainer}>
-                <Text style={[styles.loginForgotPasswordText, styles.ubuntuRegular, {color: linkColor}]} onPress={() => Linking.openURL('http://google.com')}>
+            <View style={styles.forgotPassForgotPasswordContainer}>
+                <Text style={[styles.forgotPassForgotPasswordText, styles.ubuntuRegular, {color: linkColor}]} onPress={() => Linking.openURL('http://google.com')}>
                     Back to Login
                 </Text>
             </View>
@@ -59,23 +59,23 @@ const ForgotPasswordComponent = () => {
 };
 
 const styles = StyleSheet.create({
-    loginContainer: {
+    forgotPassContainer: {
         flex: 1,
         flexDirection: 'column',
         paddingBottom: 20,
     },
-    loginTopTitleBarContainer: {
+    forgotPassTopTitleBarContainer: {
         paddingHorizontal: 20,
         marginTop: 20,
         paddingVertical: 10,
         flexDirection: 'row',
         alignItems: 'center',
     },
-    loginAppIcon: {
+    forgotPassAppIcon: {
         width: 40,
         height: 40,
     },
-    loginAppTitle: {
+    forgotPassAppTitle: {
         fontSize: 24,
         paddingHorizontal: 10,
         color: '#404040',
@@ -83,12 +83,12 @@ const styles = StyleSheet.create({
     placeholderView: {
         flex: 1
     },
-    loginImage1: {
+    forgotPassImage1: {
         flex: 1,
         width: '100%',
         height: '100%',
     },
-    loginHeading1Text: {
+    forgotPassHeading1Text: {
         marginTop: 20,
         fontSize: 32,
         textAlign: 'center',
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         marginBottom: 10,
     },
-    onboardContent1Text: {
+    forgotPassContent1Text: {
         marginTop: 20,
         fontSize: 16,
         textAlign: 'center',
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         tintColor: '#f00sdf'
     },
-    loginActionButton: {
+    forgotPassActionButton: {
         marginHorizontal: 20,
         marginTop: 20,
         height: 50,
@@ -141,25 +141,25 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.8,
         shadowRadius: 2,
     },
-    loginActionButtonText: {
+    forgotPassActionButtonText: {
         textAlign: 'center',
         color: '#404040',
         fontSize: 16,
     },
-    loginActionButtonGetstarted: {
+    forgotPassActionButtonGetstarted: {
         borderColor: '#ff6b6b',
         backgroundColor: '#ff6b6b',
     },
-    loginGetstartedText: {
+    forgotPassGetstartedText: {
         color: '#f7fff7',
     },
-    loginForgotPasswordContainer: {
+    forgotPassForgotPasswordContainer: {
         marginTop: 15,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
     },
-    loginForgotPasswordText: {
+    forgotPassForgotPasswordText: {
         color: '#1a535c',
         textDecorationLine: 'underline',
     },

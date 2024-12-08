@@ -1,3 +1,17 @@
+# ReactNative-MyCircle
+
+### Proof of concept type project for education (On going)
+This is a complete social media app developed using React Native and Spring Boot as Backend (Different Repository).
+
+* React Native
+* API Integration
+* Animation
+* Navigation
+* State Management - Redux
+
+![Screenshot of a MyCircle app screen](/screenshots/screen1.png) ![Screenshot of a MyCircle app screen](/screenshots/screen2.png) ![Screenshot of a MyCircle app screen](/screenshots/screen3.png) ![Screenshot of a MyCircle app screen](/screenshots/screen4.png)
+![Screenshot of a MyCircle app screen](/screenshots/screen5.png) ![Screenshot of a MyCircle app screen](/screenshots/screen6.png) ![Screenshot of a MyCircle app screen](/screenshots/screen1.png) ![Screenshot of a MyCircle app screen](/screenshots/screen1.png)
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
