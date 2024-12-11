@@ -47,7 +47,7 @@ const OnboardComponent = () => {
             <Image source={require("../assets/onboarding_1_edited.png")} style={styles.onboardImage1} resizeMode="center" />
             <Text style={[styles.ubuntuBold, styles.onboardHeading1Text, {color: primaryTextColor}]}>Best Social App to Make{"\n"}New Friends</Text>
             <Text style={[styles.ubuntuRegular, styles.onboardContent1Text, {color: secondaryTextColor}]}>
-                With MyCircle you will find new friends from various countries and regions of the world
+                With MyCircle you will find new friends from various countries and regions of the world.
             </Text>
             <TouchableOpacity
             style={[styles.onboardActionButton, styles.onboardActionButtonGetstarted]}

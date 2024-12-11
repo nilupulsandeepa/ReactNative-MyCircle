@@ -1,4 +1,4 @@
-import { ActivityIndicator, Image, Linking, SafeAreaView, StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import { ActivityIndicator, Image, Linking, SafeAreaView, StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, TouchableWithoutFeedback, View, Platform } from "react-native";
 import { useSelector } from "react-redux";
 import Colors from "../utils/ColorUtils";
 import { useState } from "react";
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
         flex: 1,
         borderBottomColor: '#949494',
         borderBottomWidth: 1,
-        tintColor: '#f00sdf'
+        tintColor: '#f00sdf',
     },
     loginImage1: {
         flex: 1,
@@ -189,7 +189,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 18,
         justifyContent: 'center',
-        //---- Android
         elevation: 3,
         //---- iOS
         shadowColor: '#404040',

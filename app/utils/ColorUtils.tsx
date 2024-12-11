@@ -7,6 +7,8 @@ const Colors = {
     "border_dark": "#bdbdbd",
     "link_text_light": "#f7fff7",
     "link_text_dark": "#1a535c",
+    "warning_text_light": "#eb7171",
+    "warning_text_dark": "#b52a2a",
 };
 
 export default Colors;

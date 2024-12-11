@@ -4,16 +4,34 @@ import { useSelector } from "react-redux";
 import Colors from "../utils/ColorUtils";
 
 const ForgotPasswordComponent = () => {
+    const [hasResetCodeSent, setResetCodeSent] = useState(false);
+    const resetIconSelector = {
+        "true": require('../assets/icons/reset-code.png'),
+        "false": require('../assets/icons/email.png')
+    };
 
     const { theme, systemTheme } = useSelector((state) => state.theme);
     const currentTheme = theme === 'system' ? systemTheme : theme;
 
-    const [isLogginInProgress, setIsLogginInProgress] = useState(false);
+    const [isForgotPasswordCodeInProgress, setIsForgotPassCodeInProgress] = useState(false);
 
     const primaryTextColor = currentTheme === 'light' ? Colors["primary_dark"] : Colors["primary_light"];
     const secondaryTextColor = currentTheme === 'light' ? Colors["secondary_dark"] : Colors["secondary_light"];
+    const warningTextColor = currentTheme === 'light' ? Colors["warning_text_dark"] : Colors["warning_text_light"];
     const secondaryColor = currentTheme === 'light'? Colors["border_dark"] : Colors["border_light"];
     const linkColor = currentTheme === 'light'? Colors["link_text_dark"] : Colors["link_text_light"];
+
+    const handleForgotPasswordPress = () => {
+        setIsForgotPassCodeInProgress(true);
+        setTimeout(() => {
+            setResetCodeSent(true);
+            setIsForgotPassCodeInProgress(false);
+        }, 3000);
+    };
+
+    const selectInputFieldIcon = () => {
+        return hasResetCodeSent ? resetIconSelector["true"] : resetIconSelector["false"];
+    }
 
     return (
         <SafeAreaView style={styles.forgotPassContainer}>
@@ -24,13 +42,21 @@ const ForgotPasswordComponent = () => {
             </View>
             <Image source={require("../assets/forgot-password.png")} style={styles.forgotPassImage1} resizeMode="center" />
             <Text style={[styles.ubuntuBold, styles.forgotPassHeading1Text, {color: primaryTextColor}]}>Forgot Password</Text>
-            <Text style={[styles.ubuntuRegular, styles.forgotPassContent1Text, {color: secondaryTextColor}]}>
-                Enter your email and we'll send you a link to reset your password to your email.
+            <Text
+                style={[
+                    styles.ubuntuRegular, styles.forgotPassContent1Text,
+                    {color: hasResetCodeSent ? warningTextColor : secondaryTextColor}
+                ]}>
+                    {
+                        hasResetCodeSent ?
+                        'We\'ve sent a 6-digit code to your email. Please enter it below to reset your password.' :
+                        'Enter your email and we\'ll send you a pin code to reset your password.'
+                    }
             </Text>
             <View style={styles.inputContainer}>
-                <Image source={require('../assets/icons/email.png')} style={[styles.inputIcon, {tintColor: secondaryColor}]} />
+                <Image source={resetIconSelector[hasResetCodeSent.toString()]} style={[styles.inputIcon, {tintColor: secondaryColor}]} />
                 <TextInput
-                    placeholder="Email address"
+                    placeholder={ hasResetCodeSent ? "6 Digit Code" : "Email address" }
                     placeholderTextColor={secondaryColor}
                     keyboardType="email-address"
                     autoCapitalize="none"
@@ -42,9 +68,10 @@ const ForgotPasswordComponent = () => {
             <TouchableOpacity
                 style={[styles.forgotPassActionButton, styles.forgotPassActionButtonGetstarted]}
                 activeOpacity={0.9}
-                disabled={isLogginInProgress}
+                onPress={handleForgotPasswordPress}
+                disabled={isForgotPasswordCodeInProgress}
             >
-                {isLogginInProgress ? 
+                {isForgotPasswordCodeInProgress ? 
                 <ActivityIndicator size='small' color='#f7fff7' /> :
                 <Text style={[styles.ubuntuBold, styles.forgotPassActionButtonText, styles.forgotPassGetstartedText]}>Submit</Text>
                 }
