@@ -2,22 +2,44 @@ import { ActivityIndicator, Image, Linking, SafeAreaView, StyleSheet, Text, Text
 import { useSelector } from "react-redux";
 import Colors from "../utils/ColorUtils";
 import { useState } from "react";
+import axios from "axios";
 
 const LoginComponent = () => {
+    //---- Global states
+    const { theme, systemTheme } = useSelector((state) => state.theme);
+    const currentTheme = theme === 'system' ? systemTheme : theme;
+
+    //---- Local states
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [showPasswordIcon, setShowPasswordIcon] = useState("hide");
+    const [isLogginInProgress, setIsLogginInProgress] = useState(false);
+
     const passwordIconSelector = {
         "show": require('../assets/icons/show-password.png'),
         "hide": require('../assets/icons/hide-password.png')
     };
 
-    const { theme, systemTheme } = useSelector((state) => state.theme);
-    const currentTheme = theme === 'system' ? systemTheme : theme;
-
-    const [isLogginInProgress, setIsLogginInProgress] = useState(false);
+    const idConstants = {
+        "EMAIL": "login_email",
+        "PASSWORD": "login_password"
+    };
 
     const primaryTextColor = currentTheme === 'light' ? Colors["primary_dark"] : Colors["primary_light"];
     const secondaryColor = currentTheme === 'light'? Colors["border_dark"] : Colors["border_light"];
     const linkColor = currentTheme === 'light'? Colors["link_text_dark"] : Colors["link_text_light"];
+
+    //---- Actions
+    const handleFieldInput = (fieldId, value) => {
+        switch (fieldId) {
+            case idConstants["EMAIL"]:
+                setEmail(value);
+                break;
+            case idConstants["PASSWORD"]:
+                setPassword(value);
+                break;
+        }
+    };
 
     const handleShowHidePassword = () => {
         showPasswordIcon === 'hide' ? setShowPasswordIcon('show') : setShowPasswordIcon('hide');
@@ -25,10 +47,30 @@ const LoginComponent = () => {
 
     const handleLoginPressed = () => {
         setIsLogginInProgress(true);
-        setTimeout(() => {
-            setIsLogginInProgress(false);
-        }, 3000);
+        console.log("Email: ", email, " | Password: ", password);
+        handleLoginApiSubmit();
     };
+
+    const handleLoginApiSubmit = async () => {
+        const apiEndpoint = "http://192.168.43.37:8080/api/login";
+        const httpMethod = "POST";
+        const headerObject = {"Content-Type": "application/json"};
+        const requestBodyObject = {email: email, password: password};
+
+        try {
+            const response = await axios({
+                url: apiEndpoint,
+                method: httpMethod,
+                headers: headerObject,
+                data: requestBodyObject,
+                timeout: 10000
+            });
+            console.log(response.data);
+        } catch (err) {
+            console.log(err.response.data);
+        }
+        setTimeout(() => setIsLogginInProgress(false), 3000);
+    }
 
     return (
         <SafeAreaView style={styles.loginContainer}>
@@ -49,11 +91,14 @@ const LoginComponent = () => {
                     autoCorrect={false}
                     numberOfLines={1}
                     style={[styles.inputText, styles.ubuntuRegular, {color: primaryTextColor, borderBottomColor: secondaryColor}]}
+                    value={email}
+                    onChangeText={(newText) => handleFieldInput(idConstants["EMAIL"], newText)}
                 />
             </View>
             <View style={styles.inputContainer}>
                 <Image source={require('../assets/icons/password.png')} style={[styles.inputIcon, {tintColor: secondaryColor}]} />
                 <TextInput
+                    id={idConstants["PASSWORD"]}
                     placeholder="Password"
                     placeholderTextColor={secondaryColor}
                     secureTextEntry={showPasswordIcon === 'hide'}
@@ -61,6 +106,8 @@ const LoginComponent = () => {
                     autoCorrect={false}
                     numberOfLines={1}
                     style={[styles.inputText, styles.ubuntuRegular, {color: primaryTextColor, borderBottomColor: secondaryColor}]}
+                    value={password}
+                    onChangeText={(newText) => handleFieldInput(idConstants["PASSWORD"], newText)}
                 />
                 <View style={[styles.showPasswordContainer, {borderBottomColor: secondaryColor}]}>
                     <TouchableWithoutFeedback

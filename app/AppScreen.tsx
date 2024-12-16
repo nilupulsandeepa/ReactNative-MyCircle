@@ -21,7 +21,7 @@ const AppScreen = () => {
 
     return (
     <View style={[styles.appContainer, {backgroundColor: primaryBackgroundColor}]}>
-        <ForgotPasswordComponent></ForgotPasswordComponent>
+        <LoginComponent></LoginComponent>
     </View>
     );
 }
